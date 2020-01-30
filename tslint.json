@@ -1,0 +1,17 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/*.js", "config/**/*.js", "node_modules/**/*.ts", "*.mdx"]
+  },
+  "rules": {
+    "jsx-no-lambda": false,
+    "no-angle-bracket-type-assertion": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "member-access": false,
+    "no-empty": false,
+    "one-variable-per-declaration": false,
+    "curly": false,
+    "variable-name": false
+  }
+}

@@ -1,25 +1,33 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "rootDirs": ["src", "stories"],
+    "module": "esnext",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
     "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "include": [
-    "src"
-  ]
+  "exclude": ["acceptance-tests", "build", "jest", "node_modules", "scripts", "tasks", "stories"],
+  "include": ["src"]
 }

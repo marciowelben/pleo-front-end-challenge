@@ -1,28 +1,71 @@
 {
   "name": "pleo-challenge",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.25",
+    "@types/node": "^13.5.2",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^8.1.0",
+    "husky": "4.2.1",
+    "ts-loader": "^6.2.1",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-plugin-prettier": "2.1.0",
+    "prettier": "^1.19.1",
+    "lint-staged": "10.0.4",
+    "app-json-env-gen": "0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom --watch",
+    "eject": "react-scripts eject",
+    "format": "npm run prettier --config .prettierrc --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+    "lint": "eslint --config .eslintrc --fix \"src/**/*.{ts, tsx, js, jsx}\""
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "text"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "tslint -c tsconfig.json --fix",
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
   },
   "browserslist": {
     "production": [

@@ -1,44 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pleo.io Front-end Challenge
 
-## Available Scripts
+This repository was created to [Pleo.io](https;//pleo.io) challenge for Front-End Engineer. All content here was created for that and only that reason.
 
-In the project directory, you can run:
+## Structure
 
-### `npm start`
+With the intention to write a clean code architecture, I decided to split the code between `components` and `smart-components`.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+All reusable and dumb code will be defined inside components with the structure:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+├── component
+│   ├── Styles.tsx (only if necessary)
+│   ├── View.tsx
+│   ├── View.test.tsx
+│   ├── Interface.ts (only if necessary)
+│   ├── index.ts
+```
 
-### `npm test`
+**Note that for all Styles we are using [Mui - Material Ui](https://material-ui.com) as base and styled-components inside it for custom styles**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pages and complex components will be encapsulated on it's own Context and Provider under smart-components. That will give more reusability for the component itself, once all the structure necessary to render it will be together.
 
-### `npm run build`
+e.g.: We have the smart component `session-manager`, it will check if the user is signed in or not and the sign out feature. So, wherever you want ot use it, will require only to encapsulate the provider.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The structure for smart-component should be like the following:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+├── smart-component
+│   ├── store
+│   │   ├── Actions.ts
+│   │   ├── Reducer.ts
+│   │   ├── Reducer.test.ts
+│   │   ├── State.ts
+│   ├── Provider.tsx
+│   ├── View.tsx (only if necessary)
+│   ├── View.test.tsx
+│   ├── Service.ts
+│   ├── Service.test.ts
+│   ├── Styles.ts (only if necessary)
+│   ├── index.ts
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running and Testing
 
-### `npm run eject`
+You can set all environment variables on `__env__`. For default we have only the local environment, but can be extended for `prod`, `dev`, `qa`, and anything else.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We have the following commands on `Makefile` to help set up and run the project.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+|             | Description                                                                                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| start-local | Will install all dependencies and start the app , you can also set the env you want to run, e.g.: `make start-local env=local` |
+| configure   | Will load all the settings for the selected environment, e.g: `make configure env=local`                                       |
+| build       | Will install all dependencies and create the bundle for production                                                             |
+| test        | Will run all tests using react-testing-library                                                                                 |
+| stryker     | Will run stryker mutator to mutate all tests and generate a report with uncovered mutated codes.                               |
