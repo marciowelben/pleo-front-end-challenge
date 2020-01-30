@@ -1,0 +1,15 @@
+name: GitHub Actions Check Before PR
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check and Build
+      run: |
+        make config env=local
+        make run-test
+        make build
