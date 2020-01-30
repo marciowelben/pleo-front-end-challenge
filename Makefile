@@ -11,7 +11,7 @@ build:
 	make config env=$(env)
 	npm run build
 
-build:
+run-test:
 	npm run test:watch
 
 stryker:
