@@ -28,9 +28,9 @@ const Provider: React.FC = ({ children }) => {
   }
 
   const handlers = {
-    getAll: SignInService.onEmailChanged(state, dispatch),
-    onPasswordChange: SignInService.onPasswordChanged(state, dispatch),
-    orderBy: SignInService.onSubmit(state, dispatch, onSubmissionSuccess, onSubmissionError)
+    getAll: () => {},
+    onPasswordChange: () => {},
+    orderBy: () => {}
   }
 
   const contextValue = {
