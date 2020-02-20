@@ -1,9 +1,7 @@
 import { expenses } from './test-data/expenses'
 import ExpensesService from './Service'
 import { IDirection } from 'common/types/IExpensesOrder'
-import { expensesInitialState } from './store/State'
 import Http from 'lib/Http'
-import { SET_IN_PROGRESS } from './store/Actions'
 
 describe('Expenses - smart component', () => {
   const tSearchTerm = '5b995dff2e3cb74644948a66'
