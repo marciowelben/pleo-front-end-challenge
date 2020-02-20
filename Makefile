@@ -1,5 +1,5 @@
 config:
-	node ./node_modules/app-json-env-gen/cli.js target=$(env) output=./src/config/constants/env.js
+	node ./node_modules/app-json-env-gen/cli.js target=$(env) output=./src/config/env.js
 
 start-local:
 	npm install

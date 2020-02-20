@@ -3,28 +3,30 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@types/node": "^13.5.2",
+    "@types/node": "^13.7.1",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
+    "axios": "^0.19.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
-    "typescript": "^3.7.5",
+    "react-scripts": "3.3.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "@testing-library/jest-dom": "^5.0.2",
+    "@types/jest": "^25.1.2",
+    "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.1.0",
-    "husky": "4.2.1",
+    "husky": "4.2.2",
     "ts-loader": "^6.2.1",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-plugin-prettier": "2.1.0",
     "prettier": "^1.19.1",
-    "lint-staged": "10.0.4",
+    "lint-staged": "10.0.7",
     "app-json-env-gen": "0.6.0"
   },
   "scripts": {
