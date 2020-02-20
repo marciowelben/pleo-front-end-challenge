@@ -19,7 +19,7 @@ All reusable and dumb code will be defined inside components with the structure:
 
 **Note that for all Styles we are using [Mui - Material Ui](https://material-ui.com) as base and styled-components inside it for custom styles**
 
-Pages and complex components will be encapsulated on it's own Context and Provider under smart-components. That will give more reusability for the component itself, once all the structure necessary to render it will be together.
+Complex components will be encapsulated on it's own Context and Provider under smart-components. That will give more reusability for the component itself, once all the structure necessary to render it will be together.
 
 e.g.: We have the smart component `session-manager`, it will check if the user is signed in or not and the sign out feature. So, wherever you want ot use it, will require only to encapsulate the provider.
 
@@ -33,11 +33,8 @@ The structure for smart-component should be like the following:
 │   │   ├── Reducer.test.ts
 │   │   ├── State.ts
 │   ├── Provider.tsx
-│   ├── View.tsx (only if necessary)
-│   ├── View.test.tsx
 │   ├── Service.ts
 │   ├── Service.test.ts
-│   ├── Styles.ts (only if necessary)
 │   ├── index.ts
 ```
 
