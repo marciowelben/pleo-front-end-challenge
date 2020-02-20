@@ -14,4 +14,5 @@ export default interface IExpense {
     last: string
     email: string
   }
+  value?: string | number
 }

@@ -1,21 +1,24 @@
-import { IExpensesOrderBy } from 'common/types'
+import { IExpensesOrder } from 'common/types'
 import { expensesInitialState } from './State'
 
-import { setExpenses, setOrder, setInProgress } from './Actions'
+import { setExpenses, setOrder, setInProgress, setError } from './Actions'
 import { expenses } from '../test-data/expenses'
 
 import expensesReducer from './Reducer'
+import { IDirection } from 'common/types/IExpensesOrder'
 
-describe('Expenses - Reducer tests', () => {
-  const search = (searchTerm: any, array: any[]) => {
-    return array.map(({ date, ...keepData }) => keepData).filter(item => JSON.stringify(item).includes(searchTerm))
-  }
+describe('When expenses reducer is initiated', () => {
+  const order = [
+    { value: 'date', direction: IDirection.ASC },
+    { value: 'name', direction: IDirection.DESC }
+  ] as IExpensesOrder[]
+  const error = 'this is an error'
 
-  test('should have a initialState', () => {
+  it('expenses reducer should have an initial state', () => {
     expect(expensesReducer(expensesInitialState)).toBe(expensesInitialState)
   })
 
-  test('should set expenses for setExpenses action', () => {
+  it('setExpenses action should change expenses value correctly', () => {
     const state = expensesReducer(expensesInitialState, setExpenses(expenses))
 
     expect(state).toEqual({
@@ -24,7 +27,7 @@ describe('Expenses - Reducer tests', () => {
     })
   })
 
-  test('should set inProgress for setInProgress action', () => {
+  test('setInProgress should change inProgress value correctly', () => {
     const state = expensesReducer(expensesInitialState, setInProgress(true))
 
     expect(state).toEqual({
@@ -40,23 +43,35 @@ describe('Expenses - Reducer tests', () => {
     })
   })
 
-  test('should set orderBy for setOrder action', () => {
-    const order = [
-      { value: 'date', order: 'asc' },
-      { value: 'name', order: 'asc' }
-    ] as IExpensesOrderBy[]
+  test('setOrder should change orderBy value correctly', () => {
     const state = expensesReducer(expensesInitialState, setOrder([order[0]]))
 
     expect(state).toEqual({
       ...expensesInitialState,
-      orderBy: [order[0]]
+      order: [order[0]]
     })
 
     const changedState = expensesReducer(expensesInitialState, setOrder(order))
 
     expect(changedState).toEqual({
       ...expensesInitialState,
-      orderBy: order
+      order
+    })
+  })
+
+  test('setError should change error value correctly', () => {
+    const state = expensesReducer(expensesInitialState, setError(error))
+
+    expect(state).toEqual({
+      ...expensesInitialState,
+      error
+    })
+
+    const changedState = expensesReducer(expensesInitialState, setError(null))
+
+    expect(changedState).toEqual({
+      ...expensesInitialState,
+      error: null
     })
   })
 })

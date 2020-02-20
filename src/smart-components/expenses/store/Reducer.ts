@@ -9,7 +9,7 @@ function expensesReducer(state: ExpensesState, action?: ExpensesActions): Expens
     case SET_IN_PROGRESS:
       return Object.assign({}, state, { inProgress: action.payload })
     case SET_EXPENSES_ORDER:
-      return Object.assign({}, state, { orderBy: action.payload })
+      return Object.assign({}, state, { order: action.payload })
     case SET_ERROR:
       return Object.assign({}, state, { error: action.payload })
     default:

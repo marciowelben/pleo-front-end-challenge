@@ -1,4 +1,4 @@
-import { IExpense, IExpensesOrderBy } from 'common/types'
+import { IExpense, IExpensesOrder } from 'common/types'
 
 export const SET_EXPENSES = 'expenses.setExpenses'
 export const SET_EXPENSES_ORDER = 'expenses.setOrder'
@@ -19,7 +19,7 @@ export function setExpenses(payload: IExpense[]) {
   } as const
 }
 
-export function setOrder(order: IExpensesOrderBy[]) {
+export function setOrder(order: IExpensesOrder[]) {
   return {
     type: SET_EXPENSES_ORDER,
     payload: order

@@ -1,36 +1,31 @@
 import React, { useReducer } from 'react'
 import { expensesInitialState } from './store/State'
-import { IExpensesOrderBy } from 'common'
+import { IExpensesOrder, IExpensesQuery } from 'common'
 import expensesReducer from './store/Reducer'
+import ExpensesService from './Service'
 
-const expensesContext = {
+export const expensesContext = {
   state: expensesInitialState,
   handlers: {
-    getAll: () => {},
-    searchTerm: (_searchTerm: string) => {},
-    orderBy: (_order: IExpensesOrderBy[]) => {}
+    onGetExpenses: (_query: IExpensesQuery) => {},
+    filterByTerm: (_term: string) => {},
+    setOrder: (_order: IExpensesOrder[]) => {}
   }
 }
 
-export type ExpensesContext = typeof expensesContext
-
-export const ExpensesContextProvider = React.createContext<ExpensesContext>(expensesContext)
+export const ExpensesContextProvider = React.createContext<typeof expensesContext>(expensesContext)
 
 const Provider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(expensesReducer, expensesInitialState)
 
-  const onListExpensesSuccess = (response: IExpense) => {
-    console.log('response', response)
-  }
-
-  const onListExpensesError = (error: string) => {
-    console.log('error', error)
+  const onError = (error: string) => {
+    alert(error)
   }
 
   const handlers = {
-    getAll: () => {},
-    onPasswordChange: () => {},
-    orderBy: () => {}
+    onGetExpenses: ExpensesService.onGetExpenses(dispatch, onError),
+    filterByTerm: ExpensesService.searchByTerm(state.expenses),
+    setOrder: ExpensesService.setExpensesOrder(dispatch)
   }
 
   const contextValue = {
