@@ -1,9 +1,9 @@
 import IExpense from 'common/types/IExpense'
 import Http from 'lib/Http'
 import IApiResponse from 'common/types/IApiResponse'
-import { ExpensesActions, setOrder, setInProgress, setExpenses } from './store/Actions'
+import { ExpensesActions, setOrder, setInProgress, setExpenses, updateExpense } from './store/Actions'
 
-import { IExpensesOrder, IExpensesQuery } from 'common/types'
+import { IExpensesOrder, IExpensesQuery, IExpenseUpdatePayload } from 'common/types'
 import IErrorDelegate from 'common/types/IErrorDelegate'
 import { IDirection } from 'common/types/IExpensesOrder'
 
@@ -74,5 +74,28 @@ export default class ExpensesService {
 
   static async refresh(): Promise<[IApiResponse<IExpense[]> | null, number, string | null]> {
     return Http.get<IApiResponse<IExpense[]>>('/expenses')
+  }
+
+  static onAddComment(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
+    return async (params: IExpenseUpdatePayload) => {
+      dispatch(setInProgress(true))
+
+      const [response, , requestError] = await ExpensesService.postComment(params)
+
+      if (Boolean(requestError)) {
+        onError(requestError as string)
+      } else {
+        const expenseResponse = response as IApiResponse<IExpense>
+        dispatch(updateExpense(expenseResponse.data as IExpense))
+      }
+
+      dispatch(setInProgress(false))
+    }
+  }
+
+  static async postComment(
+    params: IExpenseUpdatePayload
+  ): Promise<[IApiResponse<IExpense> | null, number, string | null]> {
+    return Http.post<object, IApiResponse<IExpense>>(`/expenses/${params.id}`, { comment: params.comment })
   }
 }
