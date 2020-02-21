@@ -6,6 +6,7 @@ import { expenses } from '../fixtures/expenses'
 
 import expensesReducer from './Reducer'
 import { IDirection } from 'common/types/IExpensesOrder'
+import { expenseWithComment } from '../fixtures/expenseWithComment'
 
 describe('When expenses reducer is initiated', () => {
   const order = [
@@ -31,10 +32,9 @@ describe('When expenses reducer is initiated', () => {
       expenses
     })
 
-    const newExpense = { ...expenses[0], comment: 'new comment' }
-    const newState = expensesReducer(state, updateExpense(newExpense))
+    const newState = expensesReducer(state, updateExpense(expenseWithComment))
 
-    expect(newState.expenses[0].comment).toEqual(newExpense.comment)
+    expect(newState.expenses[0].comment).toEqual(expenseWithComment.comment)
   })
 
   test('should change inProgress value correctly on setInProgress action', () => {
