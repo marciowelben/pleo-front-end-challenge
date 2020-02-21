@@ -76,11 +76,16 @@ export default class ExpensesService {
     return Http.get<IApiResponse<IExpense[]>>('/expenses')
   }
 
-  static onAddComment(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
+  static onUpdateExpense(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
     return async (params: IExpenseUpdatePayload) => {
       dispatch(setInProgress(true))
 
-      const [response, , requestError] = await ExpensesService.postComment(params)
+      const request = async () => {
+        if (params.comment) return await ExpensesService.postComment(params)
+        else return await ExpensesService.postReceipt(params)
+      }
+
+      const [response, , requestError] = await request()
 
       if (Boolean(requestError)) {
         onError(requestError as string)
@@ -97,5 +102,11 @@ export default class ExpensesService {
     params: IExpenseUpdatePayload
   ): Promise<[IApiResponse<IExpense> | null, number, string | null]> {
     return Http.post<object, IApiResponse<IExpense>>(`/expenses/${params.id}`, { comment: params.comment })
+  }
+
+  static async postReceipt(
+    params: IExpenseUpdatePayload
+  ): Promise<[IApiResponse<IExpense> | null, number, string | null]> {
+    return Http.post<object, IApiResponse<IExpense>>(`/expenses/${params.id}/receipts`, { comment: params.receipt })
   }
 }
