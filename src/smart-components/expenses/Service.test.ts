@@ -2,6 +2,7 @@ import { expenses } from './fixtures/expenses'
 import ExpensesService from './Service'
 import { IDirection } from 'common/types/IExpensesOrder'
 import Http from 'lib/Http'
+import { IExpenseUpdatePayload } from 'common'
 
 describe('Expenses - smart component', () => {
   const tSearchTerm = '5b995dff2e3cb74644948a66'
@@ -11,6 +12,11 @@ describe('Expenses - smart component', () => {
   const tDateMax = '2017-06-21T08:45:09.326Z'
   const tValueMin = '603.42'
   const tValueMax = '2905.02'
+  const tExpenseUpdatePayload = {
+    id: '5b995dff2e3cb74644948a66',
+    comment: 'this is a comment'
+  } as IExpenseUpdatePayload
+  const tExpenseWithComment = { ...expenses[0], comments: tExpenseUpdatePayload.comment }
 
   test('should search by term on expenses', async () => {
     const result = ExpensesService.searchByTerm(expenses)(tSearchTerm)
@@ -88,6 +94,29 @@ describe('Expenses - smart component', () => {
       expect(dispatchMock.mock.calls[1][0]).toEqual({
         type: 'expenses.setExpenses',
         payload: expenses
+      })
+    })
+
+    test('should update add comment to expense', async () => {
+      const requestMock = jest.fn().mockReturnValue([{ data: tExpenseWithComment }, 200, null])
+      const onAddComment = ExpensesService.onAddComment(dispatchMock, onError)
+
+      Http.post = requestMock
+      await onAddComment(tExpenseUpdatePayload)
+
+      expect(dispatchMock.mock.calls.length).toBe(3)
+      expect(dispatchMock.mock.calls[0][0]).toEqual({
+        type: 'expenses.inProgress',
+        payload: true
+      })
+      expect(dispatchMock.mock.calls[2][0]).toEqual({
+        type: 'expenses.inProgress',
+        payload: false
+      })
+
+      expect(dispatchMock.mock.calls[1][0]).toEqual({
+        type: 'expenses.updateExpense',
+        payload: tExpenseWithComment
       })
     })
   })
