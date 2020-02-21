@@ -1,4 +1,4 @@
-import { expenses } from './test-data/expenses'
+import { expenses } from './fixtures/expenses'
 import ExpensesService from './Service'
 import { IDirection } from 'common/types/IExpensesOrder'
 import Http from 'lib/Http'
@@ -44,13 +44,36 @@ describe('Expenses - smart component', () => {
       onError = jest.fn().mockReturnValue(null)
     })
 
-    test('onGetExpenses should return a list of expenses ', async () => {
+    test('should return a list of expenses when onGetExpenses is success', async () => {
       const requestMock = jest.fn().mockReturnValue([{ data: expenses }, 200, null])
       const query = { limit: 6, offset: 0 }
       const onGetExpenses = ExpensesService.onGetExpenses(dispatchMock, onError)
 
       Http.get = requestMock
       await onGetExpenses(query)
+
+      expect(dispatchMock.mock.calls.length).toBe(3)
+      expect(dispatchMock.mock.calls[0][0]).toEqual({
+        type: 'expenses.inProgress',
+        payload: true
+      })
+      expect(dispatchMock.mock.calls[2][0]).toEqual({
+        type: 'expenses.inProgress',
+        payload: false
+      })
+
+      expect(dispatchMock.mock.calls[1][0]).toEqual({
+        type: 'expenses.setExpenses',
+        payload: expenses
+      })
+    })
+
+    test('should update list of expenses when onRefresh is success', async () => {
+      const requestMock = jest.fn().mockReturnValue([{ data: expenses }, 200, null])
+      const onRefresh = ExpensesService.onRefresh(dispatchMock, onError)
+
+      Http.get = requestMock
+      await onRefresh()
 
       expect(dispatchMock.mock.calls.length).toBe(3)
       expect(dispatchMock.mock.calls[0][0]).toEqual({
