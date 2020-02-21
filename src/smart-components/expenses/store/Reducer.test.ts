@@ -2,7 +2,7 @@ import { IExpensesOrder } from 'common/types'
 import { expensesInitialState } from './State'
 
 import { setExpenses, setOrder, setInProgress, setError } from './Actions'
-import { expenses } from '../test-data/expenses'
+import { expenses } from '../fixtures/expenses'
 
 import expensesReducer from './Reducer'
 import { IDirection } from 'common/types/IExpensesOrder'
@@ -14,11 +14,7 @@ describe('When expenses reducer is initiated', () => {
   ] as IExpensesOrder[]
   const error = 'this is an error'
 
-  it('expenses reducer should have an initial state', () => {
-    expect(expensesReducer(expensesInitialState)).toBe(expensesInitialState)
-  })
-
-  it('setExpenses action should change expenses value correctly', () => {
+  test('should change expenses value correctly on setExpenses action', () => {
     const state = expensesReducer(expensesInitialState, setExpenses(expenses))
 
     expect(state).toEqual({
@@ -27,7 +23,7 @@ describe('When expenses reducer is initiated', () => {
     })
   })
 
-  test('setInProgress should change inProgress value correctly', () => {
+  test('should change inProgress value correctly on setInProgress action', () => {
     const state = expensesReducer(expensesInitialState, setInProgress(true))
 
     expect(state).toEqual({
@@ -43,23 +39,16 @@ describe('When expenses reducer is initiated', () => {
     })
   })
 
-  test('setOrder should change orderBy value correctly', () => {
-    const state = expensesReducer(expensesInitialState, setOrder([order[0]]))
+  test('should change order value correctly on setOrder', () => {
+    const state = expensesReducer(expensesInitialState, setOrder(order))
 
     expect(state).toEqual({
-      ...expensesInitialState,
-      order: [order[0]]
-    })
-
-    const changedState = expensesReducer(expensesInitialState, setOrder(order))
-
-    expect(changedState).toEqual({
       ...expensesInitialState,
       order
     })
   })
 
-  test('setError should change error value correctly', () => {
+  test('should change error value correctly on setError', () => {
     const state = expensesReducer(expensesInitialState, setError(error))
 
     expect(state).toEqual({

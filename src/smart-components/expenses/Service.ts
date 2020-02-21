@@ -55,6 +55,23 @@ export default class ExpensesService {
     return Http.get<IApiResponse<IExpense[]>>('/expenses', params)
   }
 
+  static onRefresh(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
+    return async () => {
+      dispatch(setInProgress(true))
+
+      const [response, , requestError] = await ExpensesService.refresh()
+
+      if (Boolean(requestError)) {
+        onError(requestError as string)
+      } else {
+        const expensesResponse = response as IApiResponse<IExpense[]>
+        dispatch(setExpenses(expensesResponse.data as IExpense[]))
+      }
+
+      dispatch(setInProgress(false))
+    }
+  }
+
   static async refresh(): Promise<[IApiResponse<IExpense[]> | null, number, string | null]> {
     return Http.get<IApiResponse<IExpense[]>>('/expenses')
   }
