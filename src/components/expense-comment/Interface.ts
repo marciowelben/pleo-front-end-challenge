@@ -5,4 +5,5 @@ export interface IProps {
   handleChangeComment: (value: string) => void
   handleToggleEditing: () => void
   handleSaveComment: () => void
+  handleClearComment: () => void
 }

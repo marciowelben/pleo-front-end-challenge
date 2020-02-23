@@ -10,7 +10,8 @@ const Component: React.FC<IProps> = ({
   newComment,
   handleChangeComment,
   handleToggleEditing,
-  handleSaveComment
+  handleSaveComment,
+  handleClearComment
 }) => {
   return (
     <CommentWrapper xs={9}>
@@ -41,7 +42,9 @@ const Component: React.FC<IProps> = ({
           size={14}
         />
         <VerticalSpacing />
-        {!isEditing && <IconButton icon={faTrash} bgColor={'white'} color={'black'} onClick={() => {}} size={14} />}
+        {!isEditing && (
+          <IconButton icon={faTrash} bgColor={'white'} color={'black'} onClick={handleClearComment} size={14} />
+        )}
       </CommentAction>
     </CommentWrapper>
   )

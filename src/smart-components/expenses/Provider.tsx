@@ -10,7 +10,8 @@ export const expensesContext = {
     onGetExpenses: (_query: IExpensesQuery) => {},
     searchByTerm: (_term: string) => {},
     setOrder: (_order: IExpensesOrder[]) => {},
-    onUpdateExpense: (_param: IExpenseUpdatePayload) => {}
+    onUpdateExpense: (_param: IExpenseUpdatePayload) => {},
+    onDeleteReceipt: (_param: IExpenseUpdatePayload) => {}
   }
 }
 
@@ -27,7 +28,8 @@ const Provider: React.FC = ({ children }) => {
     onGetExpenses: ExpensesService.onGetExpenses(dispatch, onError),
     searchByTerm: ExpensesService.searchByTerm(state.list?.expenses),
     setOrder: ExpensesService.setExpensesOrder(dispatch),
-    onUpdateExpense: ExpensesService.onUpdateExpense(dispatch, onError)
+    onUpdateExpense: ExpensesService.onUpdateExpense(dispatch, onError),
+    onDeleteReceipt: ExpensesService.onDeleteReceipt(dispatch, onError)
   }
 
   const contextValue = {
