@@ -6,6 +6,11 @@ export const ReceiptsWrapper = styled(Col)`
   position: relative;
 `
 
+export const ReceiptImageWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+`
+
 export const ReceiptImg = styled.img`
   width: 70px;
   height: 70px;
@@ -14,7 +19,13 @@ export const ReceiptImg = styled.img`
   border: 1px solid white;
   margin: 10px;
   &:hover {
-    border-width: 3#px;
+    border-width: 3px;
     cursor: pointer;
   }
+`
+
+export const CloseButton = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
 `

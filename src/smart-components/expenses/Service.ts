@@ -85,7 +85,7 @@ export default class ExpensesService {
       dispatch(setInProgress(true))
 
       const request = async () => {
-        if (params.comment) return await ExpensesService.postComment(params)
+        if (!params.files) return await ExpensesService.postComment(params)
         else {
           const formData = new FormData()
           formData.append('receipt', params.files as File)
@@ -115,5 +115,26 @@ export default class ExpensesService {
     return Http.post<object, IExpense>(`/expenses/${params.id}/receipts`, params.files, {
       'Content-Type': 'multipart/form-data'
     })
+  }
+
+  static onDeleteReceipt(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
+    return async (params: IExpenseUpdatePayload) => {
+      dispatch(setInProgress(true))
+
+      const [response, , requestError] = await ExpensesService.deleteReceipt(params)
+
+      if (Boolean(requestError)) {
+        onError(requestError as string)
+      } else {
+        const expenseResponse = response as IExpense
+        dispatch(updateExpense(expenseResponse as IExpense))
+      }
+
+      dispatch(setInProgress(false))
+    }
+  }
+
+  static async deleteReceipt(params: IExpenseUpdatePayload): Promise<[IExpense | null, number, string | null]> {
+    return Http.$delete<IExpense>(`/expenses/${params.id}${params.receiptUrl}`)
   }
 }

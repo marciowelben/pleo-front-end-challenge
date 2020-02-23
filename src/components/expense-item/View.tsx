@@ -7,7 +7,7 @@ import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ExpenseComment, IconButton, UploadReceipts } from 'components'
 import { ExpenseReceipts } from 'components/expense-receipts'
 
-const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
+const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [newComment, setNewComment] = useState('')
@@ -30,6 +30,10 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
   const handleSaveComment = () => {
     onUpdateExpense({ id: item.id, comment: newComment })
     handleToggleEditing()
+  }
+
+  const handleClearComment = () => {
+    onUpdateExpense({ id: item.id, comment: '' })
   }
 
   return (
@@ -75,10 +79,16 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
             handleToggleEditing={handleToggleEditing}
             handleChangeComment={handleChangeComment}
             handleSaveComment={handleSaveComment}
+            handleClearComment={handleClearComment}
           />
         )}
         {item.receipts.length > 0 && (
-          <ExpenseReceipts receipts={item.receipts} onUploadReceipts={onUpdateExpense} id={item.id} />
+          <ExpenseReceipts
+            receipts={item.receipts}
+            onUploadReceipts={onUpdateExpense}
+            id={item.id}
+            onDeleteReceipt={onDeleteReceipt}
+          />
         )}
         <Col xs={4}>
           <Row noGutters className={'justify-content-center'}>

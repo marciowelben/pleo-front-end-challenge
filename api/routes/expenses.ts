@@ -49,7 +49,7 @@ router.post('/:id', (req, res) => {
   const expense = expenses.find(expense => expense.id === req.params.id)
 
   if (expense) {
-    expense.comment = req.body.comment || expense.comment
+    expense.comment = req.body.comment
     res.status(200).send(expense)
   } else {
     res.status(404)
@@ -66,7 +66,9 @@ router.post('/:id/receipts', (req, res) => {
 
   if (expense) {
     const receipt = req.files.receipt as UploadedFile
-    const receiptId = `${id}-${expense.receipts.length}`
+    const receiptId = `${id}-${Math.random()
+      .toString(36)
+      .substr(2, 9)}`
     receipt.mv(`${process.cwd()}/receipts/${receiptId}`, err => {
       if (err) {
         return res.status(500).send(err)
@@ -77,6 +79,18 @@ router.post('/:id/receipts', (req, res) => {
       })
       res.status(200).send(expense)
     })
+  } else {
+    res.status(404)
+  }
+})
+
+router.delete('/:id/receipts/:receiptUrl', (req, res) => {
+  const receiptUrl = req.params.receiptUrl
+  const expense = expenses.find(expense => expense.id === req.params.id)
+
+  if (receiptUrl) {
+    expense.receipts = expense.receipts.filter(receipt => receipt.url.split('/')[2] !== receiptUrl)
+    res.status(200).send(expense)
   } else {
     res.status(404)
   }

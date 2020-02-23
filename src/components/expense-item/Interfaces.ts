@@ -7,4 +7,5 @@ export interface IStyleProps {
 export interface IProps {
   item: IExpense
   onUpdateExpense: (_param: IExpenseUpdatePayload) => void
+  onDeleteReceipt: (_param: IExpenseUpdatePayload) => void
 }
