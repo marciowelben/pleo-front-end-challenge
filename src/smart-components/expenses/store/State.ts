@@ -1,7 +1,10 @@
-import { IExpensesOrder, IExpense } from 'common/types'
+import { IExpensesOrder, IExpenseList } from 'common/types'
 
 export const expensesInitialState = {
-  expenses: [] as IExpense[],
+  list: {
+    expenses: [],
+    total: 0
+  } as IExpenseList,
   order: {} as IExpensesOrder
 }
 

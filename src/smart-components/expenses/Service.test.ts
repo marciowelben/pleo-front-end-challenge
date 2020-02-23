@@ -1,4 +1,4 @@
-import { expenses } from './fixtures/expenses'
+import { list } from './fixtures/expenses'
 import ExpensesService from './Service'
 import { IDirection } from 'common/types/IExpensesOrder'
 import Http from 'lib/Http'
@@ -23,6 +23,7 @@ describe('Expenses - smart component', () => {
     id: '5b995dff2e3cb74644948a66',
     receipt: tFile
   } as IExpenseUpdatePayload
+  const expenses = list.expenses
 
   test('should search by term on expenses', async () => {
     const result = ExpensesService.searchByTerm(expenses)(tSearchTerm)

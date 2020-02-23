@@ -24,7 +24,7 @@ const Provider: React.FC = ({ children }) => {
 
   const handlers = {
     onGetExpenses: ExpensesService.onGetExpenses(dispatch, onError),
-    filterByTerm: ExpensesService.searchByTerm(state.expenses),
+    filterByTerm: ExpensesService.searchByTerm(state.list?.expenses),
     setOrder: ExpensesService.setExpensesOrder(dispatch)
   }
 

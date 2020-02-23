@@ -71,7 +71,7 @@ const Component: React.FC<IProps> = ({ item }) => {
             handleChangeComment={handleChangeComment}
           />
         )}
-        {item.receipts.length && <ExpenseReceipts receipts={item.receipts} handleAddReceipt={() => {}} />}
+        {item.receipts.length > 0 && <ExpenseReceipts receipts={item.receipts} handleAddReceipt={() => {}} />}
         <Col xs={4}>
           <Row noGutters className={'justify-content-center'}>
             {!item.comment && !isEditing && (
@@ -80,7 +80,7 @@ const Component: React.FC<IProps> = ({ item }) => {
               </Col>
             )}
 
-            {!item.receipts.length && (
+            {item.receipts.length <= 0 && (
               <Col xs={6}>
                 <IconButton icon={faPlus} onClick={handleToggle} size={26} label={'Add Receipt'} />
               </Col>
