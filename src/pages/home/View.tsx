@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, SetStateAction } from 'react'
 import { Container } from 'react-bootstrap'
 import { HeroIntro, SearchTerm, Pagination } from 'components'
 import { Header, Wrapper } from './Styles'
@@ -13,19 +13,32 @@ const Home = () => {
     page: NumberParam,
     limit: NumberParam
   })
+  const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
-    expensesContext.handlers.onGetExpenses({ limit: 10, offset: 0 })
+    // expensesCo⁄ntext.handlers.onGetExpenses({ limit: 10, offset: 0 })
 
     setQuery({
-      page: query.page || 0,
+      page: query.page || 1,
       limit: query.limit || 10
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    expensesContext.handlers.onGetExpenses({ limit: query.limit, offset: query.page * query.limit })
+    setExpenses(prev => expensesContext.state.list.expenses || prev)
+  }, [expensesContext.state])
+
+  useEffect(() => {
+    setExpenses(() =>
+      term.length > 2
+        ? (expensesContext.handlers.searchByTerm(term) as SetStateAction<any>)
+        : expensesContext.state.list?.expenses
+    )
+  }, [term])
+
+  useEffect(() => {
+    expensesContext.handlers.onGetExpenses({ limit: query.limit, offset: (query.page - 1) * query.limit })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
@@ -61,11 +74,12 @@ const Home = () => {
           />
         </Header>
         <SearchTerm term={term} setTerm={setTerm} onClear={handleClear} />
-        <ExpensesTable expenses={expensesContext.state.list?.expenses} />
+        <ExpensesTable expenses={expenses} />
         <Pagination
+          disabled={term.length > 2}
           page={query.page}
           limit={query.limit}
-          total={expensesContext.state.list?.total}
+          total={term.length > 2 ? expenses.length : expensesContext.state.list?.total}
           onNext={handleNext}
           onPrevious={handlePrev}
           onChangeLimit={handleChangeLimit}
