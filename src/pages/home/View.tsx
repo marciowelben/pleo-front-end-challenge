@@ -74,7 +74,7 @@ const Home = () => {
           />
         </Header>
         <SearchTerm term={term} setTerm={setTerm} onClear={handleClear} />
-        <ExpensesTable expenses={expenses} />
+        <ExpensesTable expenses={expenses} onUpdateExpense={expensesContext.handlers.onUpdateExpense} />
         <Pagination
           disabled={term.length > 2}
           page={query.page}

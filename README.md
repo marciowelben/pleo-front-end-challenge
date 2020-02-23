@@ -65,7 +65,18 @@ The follwing command should be used on the root of the project (not the api fold
 
 ### Features
 
+-   Filter
+-   Comments
+-   Receipts
+-   Graph
+-   Sorting
+
 #### Filter by term
 
 You can type in a search bar, any term you want to look for. It could be a user name, email, value of receipt, id, or even a receipt name.
 To reduce the calculation time, the filter only start working after 3 character length.
+
+#### Comments
+
+You are abble to add, edit or remove comments on any expense.
+Only 1 comment for expense is allowed.

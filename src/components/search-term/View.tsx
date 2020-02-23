@@ -20,9 +20,11 @@ const Component: React.FC<IProps> = ({ term, setTerm, onClear }) => {
         onChange={event => setTerm(event.target.value)}
         placeholder={'Search by name, value, currency or user'}
       />
-      <SuffixIcon>
-        <IconButton icon={faTimes} onClick={onClear} />
-      </SuffixIcon>
+      {term.length > 2 && (
+        <SuffixIcon>
+          <IconButton icon={faTimes} onClick={onClear} />
+        </SuffixIcon>
+      )}
     </InputWrapper>
   )
 }

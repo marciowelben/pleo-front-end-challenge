@@ -6,7 +6,7 @@ import { ExpenseItem } from 'components'
 import { IconButton } from 'components/icon-button'
 import { faStore, faCalendarAlt, faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 
-const Component: React.FC<IProps> = ({ expenses }) => {
+const Component: React.FC<IProps> = ({ expenses, onUpdateExpense }) => {
   if (!expenses.length) {
     return <NoDataFound>There are no expenses to be displayed!</NoDataFound>
   }
@@ -28,7 +28,7 @@ const Component: React.FC<IProps> = ({ expenses }) => {
       </TableHead>
       <TableBody>
         {expenses.map(expense => {
-          if (expense) return <ExpenseItem item={expense} key={expense.id} />
+          if (expense) return <ExpenseItem item={expense} key={expense.id} onUpdateExpense={onUpdateExpense} />
           return null
         })}
       </TableBody>
