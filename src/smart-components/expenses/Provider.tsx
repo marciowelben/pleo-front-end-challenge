@@ -8,7 +8,7 @@ export const expensesContext = {
   state: expensesInitialState,
   handlers: {
     onGetExpenses: (_query: IExpensesQuery) => {},
-    filterByTerm: (_term: string) => {},
+    searchByTerm: (_term: string) => {},
     setOrder: (_order: IExpensesOrder[]) => {}
   }
 }
@@ -24,7 +24,7 @@ const Provider: React.FC = ({ children }) => {
 
   const handlers = {
     onGetExpenses: ExpensesService.onGetExpenses(dispatch, onError),
-    filterByTerm: ExpensesService.searchByTerm(state.list?.expenses),
+    searchByTerm: ExpensesService.searchByTerm(state.list?.expenses),
     setOrder: ExpensesService.setExpensesOrder(dispatch)
   }
 

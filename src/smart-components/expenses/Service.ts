@@ -13,14 +13,7 @@ export default class ExpensesService {
         .map(({ date, ...keepData }) => keepData)
         .filter(item => {
           const stringItem = JSON.stringify(item)
-          const regex = new RegExp(term, 'g')
-          if (stringItem.includes(term))
-            return JSON.parse(
-              stringItem.replace(regex, match => {
-                return `<em>${match}</em>`
-              })
-            )
-          return null
+          return stringItem.toLocaleLowerCase().includes(term.toLocaleLowerCase())
         })
   }
 

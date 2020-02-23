@@ -28,7 +28,8 @@ const Component: React.FC<IProps> = ({ expenses }) => {
       </TableHead>
       <TableBody>
         {expenses.map(expense => {
-          return <ExpenseItem item={expense} key={expense.id} />
+          if (expense) return <ExpenseItem item={expense} key={expense.id} />
+          return null
         })}
       </TableBody>
     </Container>
