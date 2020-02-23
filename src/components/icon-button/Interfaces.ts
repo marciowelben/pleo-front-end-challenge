@@ -4,6 +4,7 @@ export interface IStyleProps {
   size?: number
   color?: string
   bgColor?: string
+  disabled?: boolean
 }
 
 export interface IProps extends IStyleProps {

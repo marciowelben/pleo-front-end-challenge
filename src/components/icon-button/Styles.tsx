@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { IStyleProps } from './Interfaces'
 
 export const ButtonWrapper = styled.div<IStyleProps>`
-  background: ${({ bgColor }) => bgColor};
+  background: ${({ bgColor, disabled }) => (disabled ? 'transparent' : bgColor)};
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -11,8 +11,8 @@ export const ButtonWrapper = styled.div<IStyleProps>`
   min-height: ${({ size }) => size * 2}px;
   border-radius: 50%;
   &:hover {
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.2);
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'normal')};
+    background: ${({ disabled }) => (disabled ? 'transparent' : 'rgba(255, 255, 255, 0.2)')};
   }
 `
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { ButtonWrapper, ButtonLabel, ContentWrapper } from './Styles'
 
-const Component: React.FC<IProps> = ({ icon, onClick, color, size, bgColor, label }) => {
+const Component: React.FC<IProps> = ({ icon, onClick, color, size, bgColor, label, disabled }) => {
   const iconStyle = {
     color,
     fontSize: size
@@ -12,7 +12,7 @@ const Component: React.FC<IProps> = ({ icon, onClick, color, size, bgColor, labe
 
   return (
     <ContentWrapper>
-      <ButtonWrapper onClick={onClick} size={size} bgColor={bgColor}>
+      <ButtonWrapper onClick={onClick} size={size} bgColor={bgColor} disabled={disabled}>
         <FontAwesomeIcon icon={icon} style={iconStyle} />
       </ButtonWrapper>
       {label && (
