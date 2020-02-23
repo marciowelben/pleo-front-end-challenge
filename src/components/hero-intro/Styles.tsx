@@ -11,7 +11,6 @@ export const Title = styled.h1`
 export const Subtitle = styled.h4`
   font-size: 1em;
   text-align: center;
-  color: palevioletred;
   font-weight: 300;
   color: rgba(150, 163, 170, 1);
 `
