@@ -17,7 +17,7 @@ All reusable and dumb code will be defined inside components with the structure:
 │   ├── index.ts
 ```
 
-**Note that for all Styles we are using [Mui - Material Ui](https://material-ui.com) as base and styled-components inside it for custom styles**
+**Note that for all Styles we are using [React Bootstrap](https://react-bootstrap.github.io/) and styled-components**
 
 Complex components will be encapsulated on it's own Context and Provider under smart-components. That will give more reusability for the component itself, once all the structure necessary to render it will be together.
 
