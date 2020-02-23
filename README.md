@@ -62,3 +62,10 @@ The follwing command should be used on the root of the project (not the api fold
 |         | Description                                            |
 | ------- | ------------------------------------------------------ |
 | run-api | Will install the packages and run the api on port 3000 |
+
+### Features
+
+#### Filter by term
+
+You can type in a search bar, any term you want to look for. It could be a user name, email, value of receipt, id, or even a receipt name.
+To reduce the calculation time, the filter only start working after 3 character length.
