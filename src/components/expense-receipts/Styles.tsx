@@ -8,8 +8,13 @@ export const ReceiptsWrapper = styled(Col)`
 
 export const ReceiptImg = styled.img`
   width: 70px;
-  heith: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 9px;
   border: 1px solid white;
+  margin: 10px;
+  &:hover {
+    border-width: 3#px;
+    cursor: pointer;
+  }
 `

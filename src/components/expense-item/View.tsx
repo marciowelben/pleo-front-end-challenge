@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import Moment from 'react-moment'
 import { TableInfo, UserInfo, TableRow, LetterAvatar, RowDescription } from './Styles'
 import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { ExpenseComment, IconButton } from 'components'
+import { ExpenseComment, IconButton, UploadReceipts } from 'components'
 import { ExpenseReceipts } from 'components/expense-receipts'
 
 const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
@@ -77,7 +77,9 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
             handleSaveComment={handleSaveComment}
           />
         )}
-        {item.receipts.length > 0 && <ExpenseReceipts receipts={item.receipts} handleAddReceipt={() => {}} />}
+        {item.receipts.length > 0 && (
+          <ExpenseReceipts receipts={item.receipts} onUploadReceipts={onUpdateExpense} id={item.id} />
+        )}
         <Col xs={4}>
           <Row noGutters className={'justify-content-center'}>
             {!item.comment && !isEditing && (
@@ -88,7 +90,7 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
 
             {item.receipts.length <= 0 && (
               <Col xs={6}>
-                <IconButton icon={faPlus} onClick={handleToggle} size={26} label={'Add Receipt'} />
+                <UploadReceipts id={item.id} onUploadReceipts={onUpdateExpense} />
               </Col>
             )}
           </Row>
