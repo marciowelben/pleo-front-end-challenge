@@ -10,7 +10,7 @@ export const expenses: IExpense[] = [
     date: '2017-06-21T08:45:09.326Z',
     merchant: 'QUONK',
     receipts: [],
-    comment: '',
+    comment: 'this is a comment',
     category: '',
     user: {
       first: 'Atkins',

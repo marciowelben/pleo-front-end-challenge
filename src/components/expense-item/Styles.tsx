@@ -1,18 +1,30 @@
 import styled from 'styled-components'
+import { Row, Col } from 'react-bootstrap'
+import { IStyleProps } from './Interfaces'
 
-export const TableHead = styled.thead``
-
-export const TableRow = styled.tr`
+export const TableRow = styled(Row)`
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px;
 `
 
-export const TableInfo = styled.td`
+export const RowDescription = styled(Row)<IStyleProps>`
+  color: white;
+  max-height: ${({ isExpanded }) => (isExpanded ? 'auto' : 0)};
+  overflow: hidden;
+  transition: 0.3s;
+`
+
+export const TableInfo = styled(Col)<IStyleProps>`
   font-size: 0.7rem;
   vertical-align: middle !important;
   color: rgba(150, 163, 170, 1);
+  svg {
+    transition: 0.3s;
+    transform: ${({ isExpanded }) => (isExpanded ? 'rotate(180deg)' : '')};
+  }
 `
 
-export const UserInfo = styled.td`
+export const UserInfo = styled(Col)`
   font-size: 0.8rem;
   vertical-align: middle !important;
   font-weight: bold;
@@ -35,4 +47,15 @@ export const LetterAvatar = styled.div`
   justify-content: center;
   align-items: center;
   color: rgba(100, 162, 196, 1);
+`
+
+export const CommentWrapper = styled(Col)`
+  padding: 30px 0 !important;
+  font-size: 0.8rem;
+  color: rgba(150, 163, 170, 1);
+`
+export const CommentTitle = styled.p`
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
 `
