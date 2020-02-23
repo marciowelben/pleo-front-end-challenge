@@ -7,7 +7,7 @@ import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ExpenseComment, IconButton } from 'components'
 import { ExpenseReceipts } from 'components/expense-receipts'
 
-const Component: React.FC<IProps> = ({ item }) => {
+const Component: React.FC<IProps> = ({ item, onUpdateExpense }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [newComment, setNewComment] = useState('')
@@ -25,6 +25,11 @@ const Component: React.FC<IProps> = ({ item }) => {
 
   const handleChangeComment = (value: string) => {
     setNewComment(value)
+  }
+
+  const handleSaveComment = () => {
+    onUpdateExpense({ id: item.id, comment: newComment })
+    handleToggleEditing()
   }
 
   return (
@@ -69,6 +74,7 @@ const Component: React.FC<IProps> = ({ item }) => {
             newComment={newComment}
             handleToggleEditing={handleToggleEditing}
             handleChangeComment={handleChangeComment}
+            handleSaveComment={handleSaveComment}
           />
         )}
         {item.receipts.length > 0 && <ExpenseReceipts receipts={item.receipts} handleAddReceipt={() => {}} />}

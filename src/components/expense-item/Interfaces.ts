@@ -1,4 +1,4 @@
-import IExpense from 'common/types/IExpense'
+import { IExpense, IExpenseUpdatePayload } from 'common/types'
 
 export interface IStyleProps {
   isExpanded: boolean
@@ -6,4 +6,5 @@ export interface IStyleProps {
 
 export interface IProps {
   item: IExpense
+  onUpdateExpense: (_param: IExpenseUpdatePayload) => void
 }

@@ -4,7 +4,14 @@ import { IProps } from './Interface'
 import { IconButton } from 'components/icon-button'
 import { faEdit, faTrash, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
 
-const Component: React.FC<IProps> = ({ comment, isEditing, newComment, handleChangeComment, handleToggleEditing }) => {
+const Component: React.FC<IProps> = ({
+  comment,
+  isEditing,
+  newComment,
+  handleChangeComment,
+  handleToggleEditing,
+  handleSaveComment
+}) => {
   return (
     <CommentWrapper xs={9}>
       <CommentContent>
@@ -22,7 +29,7 @@ const Component: React.FC<IProps> = ({ comment, isEditing, newComment, handleCha
       <CommentAction>
         {isEditing && (
           <React.Fragment>
-            <IconButton icon={faCheck} bgColor={'white'} color={'black'} onClick={() => {}} size={14} />
+            <IconButton icon={faCheck} bgColor={'white'} color={'black'} onClick={handleSaveComment} size={14} />
             <VerticalSpacing />
           </React.Fragment>
         )}

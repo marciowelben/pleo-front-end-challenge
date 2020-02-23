@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import { expensesInitialState } from './store/State'
-import { IExpensesOrder, IExpensesQuery } from 'common'
+import { IExpensesOrder, IExpensesQuery, IExpenseUpdatePayload } from 'common'
 import expensesReducer from './store/Reducer'
 import ExpensesService from './Service'
 
@@ -9,7 +9,8 @@ export const expensesContext = {
   handlers: {
     onGetExpenses: (_query: IExpensesQuery) => {},
     searchByTerm: (_term: string) => {},
-    setOrder: (_order: IExpensesOrder[]) => {}
+    setOrder: (_order: IExpensesOrder[]) => {},
+    onUpdateExpense: (_param: IExpenseUpdatePayload) => {}
   }
 }
 
@@ -25,7 +26,8 @@ const Provider: React.FC = ({ children }) => {
   const handlers = {
     onGetExpenses: ExpensesService.onGetExpenses(dispatch, onError),
     searchByTerm: ExpensesService.searchByTerm(state.list?.expenses),
-    setOrder: ExpensesService.setExpensesOrder(dispatch)
+    setOrder: ExpensesService.setExpensesOrder(dispatch),
+    onUpdateExpense: ExpensesService.onUpdateExpense(dispatch, onError)
   }
 
   const contextValue = {
