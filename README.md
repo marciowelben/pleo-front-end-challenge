@@ -80,3 +80,10 @@ To reduce the calculation time, the filter only start working after 3 character 
 
 You are abble to add, edit or remove comments on any expense.
 Only 1 comment for expense is allowed.
+
+#### Receipts
+
+Now you can add receipts to an expense.
+You can add only 1 by 1.
+You can click on the receipt to open a gallery that you can navigate on.
+You can delete a receipt if want to.

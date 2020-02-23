@@ -26,4 +26,5 @@ export const ContentWrapper = styled.div`
 export const ButtonLabel = styled.p<IStyleProps>`
   color: ${({ color }) => color};
   font-size: ${({ size }) => size * 0.5}px;
+  margin: 0;
 `

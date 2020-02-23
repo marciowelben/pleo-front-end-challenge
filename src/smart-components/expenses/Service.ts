@@ -86,7 +86,12 @@ export default class ExpensesService {
 
       const request = async () => {
         if (params.comment) return await ExpensesService.postComment(params)
-        else return await ExpensesService.postReceipt(params)
+        else {
+          const formData = new FormData()
+          formData.append('receipt', params.files as File)
+          params.files = formData
+          return await ExpensesService.postReceipt(params)
+        }
       }
 
       const [response, , requestError] = await request()
@@ -107,6 +112,8 @@ export default class ExpensesService {
   }
 
   static async postReceipt(params: IExpenseUpdatePayload): Promise<[IExpense | null, number, string | null]> {
-    return Http.post<object, IExpense>(`/expenses/${params.id}/receipts`, { comment: params.receipt })
+    return Http.post<object, IExpense>(`/expenses/${params.id}/receipts`, params.files, {
+      'Content-Type': 'multipart/form-data'
+    })
   }
 }

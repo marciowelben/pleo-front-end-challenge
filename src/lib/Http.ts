@@ -6,18 +6,21 @@ interface IAxiosRequest {
   method: Method
   data?: any
   params?: any
+  headers?: object
 }
 
 async function executeAxiosRequest<T>({
   url,
   method,
   data,
-  params
+  params,
+  headers
 }: IAxiosRequest): Promise<[T | null, number, string | null]> {
   try {
     const response = await axios({
       baseURL: API.BASE_URL,
       url,
+      headers,
       method,
       data,
       params
@@ -38,8 +41,12 @@ export default class Http {
     return executeAxiosRequest<T>({ url, method: 'GET', params })
   }
 
-  static async post<TData, TResult>(url: string, data: TData): Promise<[TResult | null, number, string | null]> {
-    return executeAxiosRequest<TResult>({ url, method: 'POST', data })
+  static async post<TData, TResult>(
+    url: string,
+    data: TData,
+    headers?: object
+  ): Promise<[TResult | null, number, string | null]> {
+    return executeAxiosRequest<TResult>({ url, method: 'POST', data, headers })
   }
 
   static async put<TData, TResult>(url: string, data: TData): Promise<[TResult | null, number, string | null]> {

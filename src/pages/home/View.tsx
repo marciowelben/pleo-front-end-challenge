@@ -16,8 +16,6 @@ const Home = () => {
   const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
-    // expensesCo⁄ntext.handlers.onGetExpenses({ limit: 10, offset: 0 })
-
     setQuery({
       page: query.page || 1,
       limit: query.limit || 10
@@ -35,6 +33,7 @@ const Home = () => {
         ? (expensesContext.handlers.searchByTerm(term) as SetStateAction<any>)
         : expensesContext.state.list?.expenses
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [term])
 
   useEffect(() => {
