@@ -1,9 +1,8 @@
 import IExpense from 'common/types/IExpense'
 import Http from 'lib/Http'
-import IApiResponse from 'common/types/IApiResponse'
 import { ExpensesActions, setOrder, setInProgress, setExpenses, updateExpense } from './store/Actions'
 
-import { IExpensesOrder, IExpensesQuery, IExpenseUpdatePayload } from 'common/types'
+import { IExpensesOrder, IExpensesQuery, IExpenseUpdatePayload, IExpenseList } from 'common/types'
 import IErrorDelegate from 'common/types/IErrorDelegate'
 import { IDirection } from 'common/types/IExpensesOrder'
 
@@ -21,6 +20,7 @@ export default class ExpensesService {
                 return `<em>${match}</em>`
               })
             )
+          return null
         })
   }
 
@@ -54,16 +54,16 @@ export default class ExpensesService {
       if (Boolean(requestError)) {
         onError(requestError as string)
       } else {
-        const expensesResponse = response as IApiResponse<IExpense[]>
-        dispatch(setExpenses(expensesResponse.data as IExpense[]))
+        const expensesListResponse = response as IExpenseList
+        dispatch(setExpenses(expensesListResponse as IExpenseList))
       }
 
       dispatch(setInProgress(false))
     }
   }
 
-  static async getExpenses(params: object): Promise<[IApiResponse<IExpense[]> | null, number, string | null]> {
-    return Http.get<IApiResponse<IExpense[]>>('/expenses', params)
+  static async getExpenses(params: object): Promise<[IExpenseList | null, number, string | null]> {
+    return Http.get<IExpenseList>('/expenses', params)
   }
 
   static onRefresh(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
@@ -75,16 +75,16 @@ export default class ExpensesService {
       if (Boolean(requestError)) {
         onError(requestError as string)
       } else {
-        const expensesResponse = response as IApiResponse<IExpense[]>
-        dispatch(setExpenses(expensesResponse.data as IExpense[]))
+        const expensesResponse = response as IExpenseList
+        dispatch(setExpenses(expensesResponse as IExpenseList))
       }
 
       dispatch(setInProgress(false))
     }
   }
 
-  static async refresh(): Promise<[IApiResponse<IExpense[]> | null, number, string | null]> {
-    return Http.get<IApiResponse<IExpense[]>>('/expenses')
+  static async refresh(): Promise<[IExpenseList | null, number, string | null]> {
+    return Http.get<IExpenseList>('/expenses')
   }
 
   static onUpdateExpense(dispatch: React.Dispatch<ExpensesActions>, onError: IErrorDelegate) {
@@ -101,23 +101,19 @@ export default class ExpensesService {
       if (Boolean(requestError)) {
         onError(requestError as string)
       } else {
-        const expenseResponse = response as IApiResponse<IExpense>
-        dispatch(updateExpense(expenseResponse.data as IExpense))
+        const expenseResponse = response as IExpense
+        dispatch(updateExpense(expenseResponse as IExpense))
       }
 
       dispatch(setInProgress(false))
     }
   }
 
-  static async postComment(
-    params: IExpenseUpdatePayload
-  ): Promise<[IApiResponse<IExpense> | null, number, string | null]> {
-    return Http.post<object, IApiResponse<IExpense>>(`/expenses/${params.id}`, { comment: params.comment })
+  static async postComment(params: IExpenseUpdatePayload): Promise<[IExpense | null, number, string | null]> {
+    return Http.post<object, IExpense>(`/expenses/${params.id}`, { comment: params.comment })
   }
 
-  static async postReceipt(
-    params: IExpenseUpdatePayload
-  ): Promise<[IApiResponse<IExpense> | null, number, string | null]> {
-    return Http.post<object, IApiResponse<IExpense>>(`/expenses/${params.id}/receipts`, { comment: params.receipt })
+  static async postReceipt(params: IExpenseUpdatePayload): Promise<[IExpense | null, number, string | null]> {
+    return Http.post<object, IExpense>(`/expenses/${params.id}/receipts`, { comment: params.receipt })
   }
 }

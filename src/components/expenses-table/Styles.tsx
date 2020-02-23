@@ -5,7 +5,9 @@ export const TableHead = styled(Row)`
   padding: 10px;
 `
 
-export const TableBody = styled(Row)``
+export const TableBody = styled(Row)`
+  padding-bottom: 30px;
+`
 
 export const NoDataFound = styled.div`
   color: white;

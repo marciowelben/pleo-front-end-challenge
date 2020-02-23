@@ -16,3 +16,7 @@ run-test:
 
 stryker:
 	npm run test:mutation
+
+
+run-api:
+	cd api && npm install && npm start 

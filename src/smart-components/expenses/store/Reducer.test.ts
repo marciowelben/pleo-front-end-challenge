@@ -2,7 +2,7 @@ import { IExpensesOrder } from 'common/types'
 import { expensesInitialState } from './State'
 
 import { setExpenses, setOrder, setInProgress, setError, updateExpense } from './Actions'
-import { expenses } from '../fixtures/expenses'
+import { list } from '../fixtures/expenses'
 
 import expensesReducer from './Reducer'
 import { IDirection } from 'common/types/IExpensesOrder'
@@ -16,25 +16,25 @@ describe('When expenses reducer is initiated', () => {
   const error = 'this is an error'
 
   test('should change expenses value correctly on setExpenses action', () => {
-    const state = expensesReducer(expensesInitialState, setExpenses(expenses))
+    const state = expensesReducer(expensesInitialState, setExpenses(list))
 
     expect(state).toEqual({
       ...expensesInitialState,
-      expenses
+      list
     })
   })
 
   test('should update expenses correctly on updateExpense action', () => {
-    const state = expensesReducer(expensesInitialState, setExpenses(expenses))
+    const state = expensesReducer(expensesInitialState, setExpenses(list))
 
     expect(state).toEqual({
       ...expensesInitialState,
-      expenses
+      list
     })
 
     const newState = expensesReducer(state, updateExpense(expenseWithComment))
 
-    expect(newState.expenses[0].comment).toEqual(expenseWithComment.comment)
+    expect(newState.list.expenses[0].comment).toEqual(expenseWithComment.comment)
   })
 
   test('should change inProgress value correctly on setInProgress action', () => {

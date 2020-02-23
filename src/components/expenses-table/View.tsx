@@ -13,7 +13,7 @@ const Component: React.FC<IProps> = ({ expenses }) => {
 
   return (
     <Container fluid>
-      <TableHead noGutter>
+      <TableHead>
         <Col xs={1} />
         <Col xs={4} />
         <Col xs={2} className={'text-center'}>

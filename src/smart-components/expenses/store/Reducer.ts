@@ -8,15 +8,17 @@ import {
   SET_ERROR,
   UPDATE_EXPENSE
 } from './Actions'
-import { expenses } from '../fixtures/expenses'
 
 function expensesReducer(state: ExpensesState, action?: ExpensesActions): ExpensesState {
   switch (action?.type) {
     case SET_EXPENSES:
-      return Object.assign({}, state, { expenses: action.payload })
+      return Object.assign({}, state, { list: action.payload })
     case UPDATE_EXPENSE:
       return Object.assign({}, state, {
-        expenses: expenses.map(item => (item.id === action.payload.id ? action.payload : item))
+        list: {
+          ...state.list,
+          expenses: state.list.expenses.map(item => (item.id === action.payload.id ? action.payload : item))
+        }
       })
     case SET_IN_PROGRESS:
       return Object.assign({}, state, { inProgress: action.payload })

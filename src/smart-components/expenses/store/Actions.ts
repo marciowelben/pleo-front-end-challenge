@@ -1,4 +1,4 @@
-import { IExpense, IExpensesOrder } from 'common/types'
+import { IExpense, IExpensesOrder, IExpenseList } from 'common/types'
 
 export const SET_EXPENSES = 'expenses.setExpenses'
 export const UPDATE_EXPENSE = 'expenses.updateExpense'
@@ -13,7 +13,7 @@ export function setInProgress(payload: boolean) {
   } as const
 }
 
-export function setExpenses(payload: IExpense[]) {
+export function setExpenses(payload: IExpenseList) {
   return {
     type: SET_EXPENSES,
     payload

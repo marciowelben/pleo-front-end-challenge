@@ -39,7 +39,7 @@
     "app-json-env-gen": "0.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom --watch",
