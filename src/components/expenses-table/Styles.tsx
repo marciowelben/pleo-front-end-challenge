@@ -17,3 +17,7 @@ export const NoDataFound = styled.div`
   font-weight: 200;
   color: rgb(150, 150, 150);
 `
+
+export const SortingButtons = styled(Row)`
+  margin-left: 5px;
+`

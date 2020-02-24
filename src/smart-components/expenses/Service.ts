@@ -17,15 +17,26 @@ export default class ExpensesService {
         })
   }
 
-  static orderBy: any = (list: IExpense[], order: IExpensesOrder) => {
+  static orderBy = (list: IExpense[], order: IExpensesOrder): IExpense[] => {
     const sorting = (a: any, b: any) => {
+      let left, right
       if (order.value === 'value') {
-        a[order.value] = parseFloat(a.amount.value)
-        b[order.value] = parseFloat(b.amount.value)
+        left = parseFloat(a.amount.value)
+        right = parseFloat(b.amount.value)
       }
 
-      if (IDirection.ASC === order.direction) return a[order.value] > b[order.value] ? 1 : -1
-      else return a[order.value] < b[order.value] ? 1 : -1
+      if (order.value === 'date') {
+        left = new Date(a.date)
+        right = new Date(b.date)
+      }
+
+      if (order.value === 'merchant') {
+        left = a.merchant
+        right = b.merchant
+      }
+
+      if (IDirection.ASC === order.direction) return left > right ? 1 : -1
+      else return left < right ? 1 : -1
     }
 
     list.sort(sorting)
@@ -33,7 +44,7 @@ export default class ExpensesService {
   }
 
   static setExpensesOrder(dispatch: React.Dispatch<ExpensesActions>) {
-    return (order: IExpensesOrder[]) => {
+    return (order: IExpensesOrder) => {
       dispatch(setOrder(order))
     }
   }
