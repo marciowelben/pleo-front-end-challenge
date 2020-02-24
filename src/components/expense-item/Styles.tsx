@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
 import { IStyleProps } from './Interfaces'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const TableRow = styled(Row)`
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -19,7 +20,7 @@ export const TableInfo = styled(Col)<IStyleProps>`
   vertical-align: middle !important;
   color: rgba(150, 163, 170, 1);
   svg {
-    transition: 0.3s;
+    trapxnsition: 0.3s;
     transform: ${({ isExpanded }) => (isExpanded ? 'rotate(180deg)' : '')};
   }
 `
@@ -54,8 +55,9 @@ export const CommentWrapper = styled(Col)`
   font-size: 0.8rem;
   color: rgba(150, 163, 170, 1);
 `
-export const CommentTitle = styled.p`
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: white;
+export const Icons = styled(FontAwesomeIcon)`
+  @media (max-width: 767px) {
+    margin-right: 15px;
+    margin-top: 15px;
+  }
 `

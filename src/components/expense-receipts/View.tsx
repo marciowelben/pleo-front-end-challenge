@@ -23,9 +23,9 @@ const Component: React.FC<IProps> = ({ receipts, onUploadReceipts, id, onDeleteR
   }
 
   return (
-    <ReceiptsWrapper xs={10}>
+    <ReceiptsWrapper md={12} lg={10}>
       <Row>
-        <Col xs={2} className={'d-flex align-items-center justify-content-start'}>
+        <Col md={3} lg={2} className={'d-flex align-items-center justify-content-start'}>
           <UploadReceipts id={id} onUploadReceipts={onUploadReceipts} />
         </Col>
         <Col>

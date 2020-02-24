@@ -22,6 +22,9 @@ export const CommentAction = styled.div`
   left: -70px;
   flex-direction: column;
   display: flex;
+  @media (max-width: 767px) {
+    left: -35px;
+  }
 `
 
 export const VerticalSpacing = styled.div`
