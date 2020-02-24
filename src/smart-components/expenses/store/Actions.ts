@@ -27,7 +27,7 @@ export function updateExpense(payload: IExpense) {
   } as const
 }
 
-export function setOrder(order: IExpensesOrder[]) {
+export function setOrder(order: IExpensesOrder) {
   return {
     type: SET_EXPENSES_ORDER,
     payload: order

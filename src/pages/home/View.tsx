@@ -74,9 +74,11 @@ const Home = () => {
         </Header>
         <SearchTerm term={term} setTerm={setTerm} onClear={handleClear} />
         <ExpensesTable
-          expenses={expenses}
+          expenses={expensesContext.handlers.orderBy(expenses, expensesContext.state.order) as SetStateAction<any>}
           onUpdateExpense={expensesContext.handlers.onUpdateExpense}
           onDeleteReceipt={expensesContext.handlers.onDeleteReceipt}
+          setOrder={expensesContext.handlers.setOrder}
+          order={expensesContext.state.order}
         />
         <Pagination
           disabled={term.length > 2}

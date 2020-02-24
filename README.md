@@ -68,7 +68,6 @@ The follwing command should be used on the root of the project (not the api fold
 -   Filter
 -   Comments
 -   Receipts
--   Graph
 -   Sorting
 
 #### Filter by term
@@ -87,3 +86,8 @@ Now you can add receipts to an expense.
 You can add only 1 by 1.
 You can click on the receipt to open a gallery that you can navigate on.
 You can delete a receipt if want to.
+
+#### Sorting
+
+You are also allowed to sort by date, value or merchant.
+Once it's only a client side order, it will sort only among displayed items.
