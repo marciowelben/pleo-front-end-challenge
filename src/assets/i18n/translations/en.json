@@ -1,0 +1,10 @@
+{
+  "pleo.title": "Pleo Front-end Challenge",
+  "pleo.subtitle": "This is just an example for the Pleo.io challenge",
+  "searchbar": "Search by name, value, currency...",
+  "comment": "Comment",
+  "addreceipt": "Add Receipt",
+  "adcomment": "Add Comment",
+  "from": "from",
+  "nodata": "There are no expenses to be displayed!"
+}

@@ -30,7 +30,7 @@ const Component: React.FC<IProps> = ({ receipts, onUploadReceipts, id, onDeleteR
         </Col>
         <Col>
           {imageList.map((image, i) => (
-            <ReceiptImageWrapper>
+            <ReceiptImageWrapper key={image}>
               <ReceiptImg src={`${API.BASE_URL}${image}`} onClick={() => handleOpenGallery(i)} />
               <CloseButton>
                 <IconButton

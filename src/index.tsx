@@ -4,15 +4,17 @@ import { Home } from 'pages'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Router, RouteComponentProps, globalHistory } from '@reach/router'
 import { QueryParamProvider } from 'use-query-params'
+import { Provider as I18nContextProvider } from 'lib/Language'
 
 const Component = (_: RouteComponentProps) => <Home />
 
-// TODO: Implement stryker mutator test
 ReactDOM.render(
   <QueryParamProvider reachHistory={globalHistory}>
-    <Router>
-      <Component path="/" />
-    </Router>
+    <I18nContextProvider>
+      <Router>
+        <Component path="/" />
+      </Router>
+    </I18nContextProvider>
   </QueryParamProvider>,
   document.getElementById('root')
 )

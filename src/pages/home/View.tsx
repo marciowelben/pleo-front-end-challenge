@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect, SetStateAction } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import { HeroIntro, SearchTerm, Pagination } from 'components'
-import { Header, Wrapper } from './Styles'
+import { Header, Wrapper, Button } from './Styles'
 import { ExpensesTable } from 'components/expenses-table'
 import { ExpensesProvider, ExpensesContextProvider, ExpensesContext } from 'smart-components'
 import { useQueryParams, NumberParam } from 'use-query-params'
+import { I18nContextProvider } from 'lib/Language'
 
 const Home = () => {
   const expensesContext = useContext<ExpensesContext>(ExpensesContextProvider)
@@ -14,6 +15,7 @@ const Home = () => {
     limit: NumberParam
   })
   const [expenses, setExpenses] = useState([])
+  const i18n = useContext(I18nContextProvider)
 
   useEffect(() => {
     setQuery({
@@ -63,15 +65,22 @@ const Home = () => {
     setTerm('')
   }
 
+  const onLanguageSelect = (lang: string) => i18n.handlers.changeLanguage({ type: 'setLanguage', payload: lang })
+
   return (
     <Wrapper>
       <Container fluid={window.screen.width < 768}>
         <Header>
-          <HeroIntro
-            title={'Pleo Front-end Challenge'}
-            subtitle={'This is just an example for the Pleo.io challenge'}
-          />
+          <HeroIntro title={i18n.state.translate('pleo.title')} subtitle={i18n.state.translate('pleo.subtitle')} />
         </Header>
+        <Row className={'justify-content-center'}>
+          <Button isSelected={i18n.state.langCode === 'pt'} onClick={() => onLanguageSelect('pt')}>
+            PT
+          </Button>
+          <Button isSelected={i18n.state.langCode === 'en'} onClick={() => onLanguageSelect('en')}>
+            EN
+          </Button>
+        </Row>
         <SearchTerm term={term} setTerm={setTerm} onClear={handleClear} />
         <ExpensesTable
           expenses={expensesContext.handlers.orderBy(expenses, expensesContext.state.order) as SetStateAction<any>}

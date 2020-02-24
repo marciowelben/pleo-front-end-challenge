@@ -1,0 +1,10 @@
+{
+  "pleo.title": "Desafio Front-end Pleo",
+  "pleo.subtitle": "Este é apenas um exemplo para o desafio da Pleo",
+  "searchbar": "Busque por nome, valor, moeda...",
+  "comment": "Comentário",
+  "addreceipt": "Add Receita",
+  "addcomment": "Add Comentário",
+  "from": "de",
+  "nodata": "Não há espesas para serem exibidas!"
+}
