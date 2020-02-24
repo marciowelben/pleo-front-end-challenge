@@ -2,6 +2,31 @@
 
 This repository was created to [Pleo.io](https;//pleo.io) challenge for Front-End Engineer. All content here was created for that and only that reason.
 
+## About the Challenge
+
+It was requested me to write a front-end using the api provided (adjustments were allowed). However, some pointrs was supposed to be taken.
+The user should be able to add Receipts and Comments to an expense.
+With that functionalitie I also created some to remove or edit comments and remove receipts.
+
+The filter was implemented like a search bar, the user can filter by any term (excluding dates).
+
+The project took like 30 hours to be completed.
+
+The ui is responsive and with a good look.
+
+The `expenses` smart component have unit and integration tests.
+
+## Biggest challenges
+
+The challenge at all it's very simple, but I had not too much time to implement. Therefore I had to skip some functionalities that I was intending to implement.
+But the ui was the biggest challenge in my opnion, I like to build UI but I prefer to work with it's contruction proccess.
+
+## What could be improved?
+
+Well, I was intending to create a sorting and filter in the api, to be more friendly user, but unforntunately the challenge requested a client-side feature, so I decided to implement in the most simple way.
+
+I could also improve the filter, it could highlight the matches, so the user would know why the result is being displayed.
+
 ## Structure
 
 With the intention to write a clean code architecture, I decided to split the code between `components` and `smart-components`.

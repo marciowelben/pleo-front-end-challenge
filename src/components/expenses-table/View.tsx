@@ -35,7 +35,7 @@ const Component: React.FC<IProps> = ({ expenses, onUpdateExpense, onDeleteReceip
 
   return (
     <Container fluid>
-      <TableHead>
+      <TableHead className={'d-md-flex d-none'}>
         <Col xs={1} />
         <Col xs={4} />
         <Col xs={2} className={'text-center'}>

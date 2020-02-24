@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { IProps } from './Interfaces'
 import { Row, Col } from 'react-bootstrap'
 import Moment from 'react-moment'
-import { TableInfo, UserInfo, TableRow, LetterAvatar, RowDescription } from './Styles'
-import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { TableInfo, UserInfo, TableRow, LetterAvatar, RowDescription, Icons } from './Styles'
+import { faChevronDown, faPlus, faStore, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { ExpenseComment, IconButton, UploadReceipts } from 'components'
 import { ExpenseReceipts } from 'components/expense-receipts'
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 
 const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt }) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -39,13 +40,13 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt })
   return (
     <Col xs={12}>
       <TableRow className={'align-items-center'}>
-        <TableInfo xs={1}>
+        <TableInfo xs={2} md={1}>
           <LetterAvatar>
             {user.first[0]}
             {user.last[0]}
           </LetterAvatar>
         </TableInfo>
-        <UserInfo xs={4}>
+        <UserInfo xs={10} md={4}>
           <Row noGutters>
             <Col>
               <Row noGutters>
@@ -57,13 +58,15 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt })
             </Col>
           </Row>
         </UserInfo>
-        <TableInfo xs={2} className={'text-center'}>
-          {item.merchant}
+        <TableInfo xs={4} md={2} className={'text-center'}>
+          <Icons className={'d-md-none'} icon={faStore} /> {item.merchant}
         </TableInfo>
-        <TableInfo xs={2} className={'text-center'}>
+        <TableInfo xs={4} md={2} className={'text-center'}>
+          <Icons className={'d-md-none'} icon={faCalendar} />
           <Moment format="YYYY-MM-DD">{item.date}</Moment>
         </TableInfo>
-        <TableInfo xs={2} className={'text-center'}>
+        <TableInfo xs={4} md={2} className={'text-center'}>
+          <Icons className={'d-md-none'} icon={faMoneyBill} />
           {amount.value} {amount.currency.toLowerCase()}
         </TableInfo>
         <TableInfo isExpanded={isExpanded}>
@@ -90,7 +93,7 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt })
             onDeleteReceipt={onDeleteReceipt}
           />
         )}
-        <Col xs={4}>
+        <Col xs={8} md={4}>
           <Row noGutters className={'justify-content-center'}>
             {!item.comment && !isEditing && (
               <Col xs={6}>

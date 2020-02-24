@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Container>
+      <Container fluid={window.screen.width < 768}>
         <Header>
           <HeroIntro
             title={'Pleo Front-end Challenge'}
