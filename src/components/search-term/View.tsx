@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { IProps } from './Interfaces'
 import { Input, InputWrapper, PrefixIcon, SuffixIcon } from './Styles'
 import { IconButton } from 'components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { I18nContextProvider } from 'lib/Language'
 
 const Component: React.FC<IProps> = ({ term, setTerm, onClear }) => {
   const iconStyle = {
     color: 'white'
   }
+  const i18n = useContext(I18nContextProvider)
 
   return (
     <InputWrapper>
@@ -18,7 +20,7 @@ const Component: React.FC<IProps> = ({ term, setTerm, onClear }) => {
       <Input
         value={term}
         onChange={event => setTerm(event.target.value)}
-        placeholder={'Search by name, value, currency or user'}
+        placeholder={i18n.state.translate('searchbar')}
       />
       {term.length > 2 && (
         <SuffixIcon>

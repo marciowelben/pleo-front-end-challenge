@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { CommentWrapper, CommentTitle, CommentContent, CommentAction, VerticalSpacing, InputComment } from './Styles'
 import { IProps } from './Interface'
 import { IconButton } from 'components/icon-button'
 import { faEdit, faTrash, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { I18nContextProvider } from 'lib/Language'
 
 const Component: React.FC<IProps> = ({
   comment,
@@ -13,10 +14,11 @@ const Component: React.FC<IProps> = ({
   handleSaveComment,
   handleClearComment
 }) => {
+  const i18n = useContext(I18nContextProvider)
   return (
     <CommentWrapper xs={9}>
       <CommentContent>
-        <CommentTitle>Comment</CommentTitle>
+        <CommentTitle>{i18n.state.translate('comment')}</CommentTitle>
         {!isEditing && comment}
         {isEditing && (
           <InputComment

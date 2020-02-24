@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { IProps } from './Interfaces'
 import { Row, Col } from 'react-bootstrap'
 import Moment from 'react-moment'
@@ -7,11 +7,13 @@ import { faChevronDown, faPlus, faStore, faCalendar } from '@fortawesome/free-so
 import { ExpenseComment, IconButton, UploadReceipts } from 'components'
 import { ExpenseReceipts } from 'components/expense-receipts'
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
+import { I18nContextProvider } from 'lib/Language'
 
 const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [newComment, setNewComment] = useState('')
+  const i18n = useContext(I18nContextProvider)
   const { user, amount } = item
 
   const handleToggle = () => {
@@ -97,7 +99,12 @@ const Component: React.FC<IProps> = ({ item, onUpdateExpense, onDeleteReceipt })
           <Row noGutters className={'justify-content-center'}>
             {!item.comment && !isEditing && (
               <Col xs={6}>
-                <IconButton icon={faPlus} onClick={handleToggleEditing} size={26} label={'Add Comment'} />
+                <IconButton
+                  icon={faPlus}
+                  onClick={handleToggleEditing}
+                  size={26}
+                  label={i18n.state.translate('addcomment')}
+                />
               </Col>
             )}
 

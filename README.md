@@ -16,10 +16,12 @@ The ui is responsive and with a good look.
 
 The `expenses` smart component have unit and integration tests.
 
+The system have a multilanguage support using i18n for react.
+
 ## Biggest challenges
 
 The challenge at all it's very simple, but I had not too much time to implement. Therefore I had to skip some functionalities that I was intending to implement.
-But the ui was the biggest challenge in my opnion, I like to build UI but I prefer to work with it's contruction proccess.
+But the ui was the biggest challenge on my opnion, I like to build UI but I prefer to work with it's contruction proccess.
 
 ## What could be improved?
 
@@ -116,3 +118,7 @@ You can delete a receipt if want to.
 
 You are also allowed to sort by date, value or merchant.
 Once it's only a client side order, it will sort only among displayed items.
+
+#### Language
+
+You can change the main language on the buttons on Homepage. For now only English and Portuguese (Brazil) available.

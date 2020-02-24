@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TableHead, TableBody, NoDataFound, SortingButtons } from './Styles'
 import { IProps } from './Interfaces'
 import { Container, Col, Row } from 'react-bootstrap'
@@ -6,10 +6,12 @@ import { ExpenseItem } from 'components'
 import { IconButton } from 'components/icon-button'
 import { faStore, faCalendarAlt, faMoneyBill, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { IDirection } from 'common/types/IExpensesOrder'
+import { I18nContextProvider } from 'lib/Language'
 
 const Component: React.FC<IProps> = ({ expenses, onUpdateExpense, onDeleteReceipt, setOrder }) => {
+  const i18n = useContext(I18nContextProvider)
   if (!expenses.length) {
-    return <NoDataFound>There are no expenses to be displayed!</NoDataFound>
+    return <NoDataFound>{i18n.state.translate('nodata')}</NoDataFound>
   }
 
   const handleOrderStore = (direction: IDirection) => {
